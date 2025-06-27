@@ -17,11 +17,12 @@ RUN apt-get update || true && \
     libtool \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Copy pre-cloned solo-ckpool source
+# Clone solo-ckpool with fractional difficulty support
 WORKDIR /build
-COPY solo-ckpool-source/ ckpool-solo/
+RUN git clone https://github.com/xyephy/solo-ckpool.git ckpool-solo
 
 WORKDIR /build/ckpool-solo
+RUN git checkout solobtc
 
 # Build ckpool-solo
 RUN ./autogen.sh && \

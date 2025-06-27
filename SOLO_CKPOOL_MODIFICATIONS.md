@@ -34,7 +34,7 @@ Solo-ckpool has been successfully integrated into the benchmarking tool to provi
 
 ### Integration Components
 
-1. **solo-ckpool.dockerfile**: Builds solo-ckpool from source
+1. **solo-ckpool.dockerfile**: Builds solo-ckpool from GitHub source (https://github.com/xyephy/solo-ckpool)
 2. **solo-ckpool service**: Runs ckpool in BTCSOLO mode (-B flag)
 3. **solo-ckpool-miner-proxy**: Monitors traffic and collects metrics
 4. **Configuration files**: Pool settings and Bitcoin daemon connection
