@@ -123,15 +123,44 @@ All existing SV1 metrics are collected:
 **Configuration Examples**:
 ```json
 {
-  "mindiff": 0.1,     // Minimum difficulty of 0.1 (fractional)
-  "startdiff": 0.5,   // Starting difficulty of 0.5 (fractional)  
-  "maxdiff": 100.0    // Maximum difficulty of 100.0
+  "mindiff": 0.1,           // Minimum difficulty of 0.1 (fractional)
+  "startdiff": 0.5,         // Starting difficulty of 0.5 (fractional)  
+  "maxdiff": 100.0,         // Maximum difficulty of 100.0
+  "shares_per_minute": 15.0 // Target 15 shares per minute for consistent benchmarking
 }
 ```
 
 **Backward Compatibility**:
 - Integer values still work: `"mindiff": 1, "startdiff": 42`
 - Mixed configurations supported: `"mindiff": 0.5, "startdiff": 10`
+- Default shares_per_minute: 18.0 (maintains existing behavior if not specified)
+
+### Shares Per Minute Control ✅
+
+**NEW**: Solo-ckpool now supports configurable share submission rates for standardized benchmarking.
+
+**Key Benefits**:
+- ✅ **Consistent benchmarking**: Set identical share rates for SV1 and SV2 comparisons
+- ✅ **Flexible testing scenarios**: Easily adjust load characteristics
+- ✅ **Real-time adjustment**: Variable difficulty adapts to maintain target rate
+- ✅ **Backward compatibility**: Default 18.0 spm maintains existing behavior
+
+**Configuration Examples for Different Scenarios**:
+```json
+// Low-latency testing
+{"shares_per_minute": 5.0}   // 1 share every 12 seconds
+
+// Balanced benchmarking  
+{"shares_per_minute": 15.0}  // 1 share every 4 seconds
+
+// High-throughput testing
+{"shares_per_minute": 30.0}  // 1 share every 2 seconds
+```
+
+**Algorithm Enhancement**:
+- Dynamic difficulty adjustment based on `shares_per_minute / 60.0` target rate
+- Proportional hysteresis bounds to prevent oscillation
+- Configurable timing thresholds based on target share rate
 
 ## Limitations and Considerations
 

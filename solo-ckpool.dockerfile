@@ -17,12 +17,12 @@ RUN apt-get update || true && \
     libtool \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Clone solo-ckpool with fractional difficulty support
+# Clone solo-ckpool with fractional difficulty and shares_per_minute support
 WORKDIR /build
-RUN git clone https://github.com/xyephy/solo-ckpool.git ckpool-solo
+RUN git config --global http.sslverify false && \
+    git clone https://github.com/xyephy/solo-ckpool.git ckpool-solo
 
 WORKDIR /build/ckpool-solo
-RUN git checkout solobtc
 
 # Build ckpool-solo
 RUN ./autogen.sh && \
