@@ -20,7 +20,7 @@ RUN apt-get update || true && \
 # Clone solo-ckpool with fractional difficulty and shares_per_minute support
 WORKDIR /build
 RUN git config --global http.sslverify false && \
-    git clone https://github.com/xyephy/solo-ckpool.git ckpool-solo
+    git clone -b solobtc https://github.com/xyephy/solo-ckpool.git ckpool-solo
 
 WORKDIR /build/ckpool-solo
 
